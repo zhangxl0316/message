@@ -8,9 +8,9 @@ import com.alibaba.fastjson.JSON;
 
 /**
  * @ClassName: JSONReturn
- * @Description: json½á¹ûÀà
- * @author ÕÅöÎÀÚ
- * @date 2016Äê2ÔÂ15ÈÕ ÉÏÎç10:43:26
+ * @Description: jsonç»“æœç±»
+ * @author å¼ é‘«ç£Š
+ * @date 2016å¹´2æœˆ15æ—¥ ä¸Šåˆ10:43:26
  */
 public class JSONReturn {
 	private Map<String, Object> dataMap;
@@ -18,11 +18,11 @@ public class JSONReturn {
 	/**
 	 * 
 	 * @Title: newInstance
-	 * @Description: springMVC Ä¬ÈÏcontrollerµ¥Àı
+	 * @Description: springMVC é»˜è®¤controllerå•ä¾‹
 	 * @param:
 	 * @return:
-	 * @author ÕÅöÎÀÚ
-	 * @date 2016Äê2ÔÂ15ÈÕ ÏÂÎç5:52:37
+	 * @author å¼ é‘«ç£Š
+	 * @date 2016å¹´2æœˆ15æ—¥ ä¸‹åˆ5:52:37
 	 */
 	public static JSONReturn newInstance(){
 		return new JSONReturn();

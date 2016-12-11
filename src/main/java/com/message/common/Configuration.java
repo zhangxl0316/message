@@ -1,15 +1,14 @@
 package com.message.common;
-
 /**
  * @ClassName: Configuration
- * @Description: ÅäÖÃÎÄ¼ş
- * @author ÕÅöÎÀÚ
- * @date 2016Äê2ÔÂ15ÈÕ ÉÏÎç10:38:01
+ * @Description: é…ç½®æ–‡ä»¶
+ * @author å¼ é‘«ç£Š
+ * @date 2016å¹´2æœˆ15æ—¥ ä¸Šåˆ10:38:01
  */
 public class Configuration {
-	/** total¼ü ´æ·Å×Ü¼ÇÂ¼Êı£¬±ØĞëµÄ ,EasyUI¸ù¾İÕâ¸ö²ÎÊı£¬¿ÉÒÔ¼ÆËãpageºÍnumberµÄÖµ£¬Õâ¸öÖµ²»ÊÇusersµÄ³¤¶È */
+	/** totalé”® å­˜æ”¾æ€»è®°å½•æ•°ï¼Œå¿…é¡»çš„ ,EasyUIæ ¹æ®è¿™ä¸ªå‚æ•°ï¼Œå¯ä»¥è®¡ç®—pageå’Œnumberçš„å€¼ï¼Œè¿™ä¸ªå€¼ä¸æ˜¯usersçš„é•¿åº¦ */
 	public static final String TOTAL = "total";
-	/** rows¼ü ´æ·ÅÃ¿Ò³¼ÇÂ¼ list */
+	/** rowsé”® å­˜æ”¾æ¯é¡µè®°å½• list */
 	public static final String DATA = "rows";
 	public static final String SUCCESS = "success";
 	public static final String MESSAGE = "message";

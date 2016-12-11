@@ -1,17 +1,16 @@
 package com.message.common;
 
-
 import java.util.UUID;
 
 public class CommonUtil {
 	
 	/**
 	 * @Title: getUUID
-	 * @Description: uuid Ö÷¼ü
+	 * @Description: uuid ä¸»é”®
 	 * @param:
 	 * @return:
-	 * @author ÕÅöÎÀÚ
-	 * @date 2016Äê2ÔÂ17ÈÕ ÉÏÎç11:06:01
+	 * @author å¼ é‘«ç£Š
+	 * @date 2016å¹´2æœˆ17æ—¥ ä¸Šåˆ11:06:01
 	 */
 	public static String getUUID(){
 		String s = UUID.randomUUID().toString();
