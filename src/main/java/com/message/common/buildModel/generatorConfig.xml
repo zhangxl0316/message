@@ -40,7 +40,7 @@
 		</javaClientGenerator>
 
 		<!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
-		<table tableName="MSG_MODEL" domainObjectName="MSG_MODEL"
+		<table tableName="MSG_MODEL" domainObjectName="MsgModel"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false" />

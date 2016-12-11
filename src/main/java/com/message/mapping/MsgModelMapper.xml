@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.message.dao.MsgModelMapper" >
+  <resultMap id="BaseResultMap" type="com.message.model.MsgModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="MSG_TYPE" property="msgType" jdbcType="DECIMAL" />
+    <result column="MSG_MODE" property="msgMode" jdbcType="DECIMAL" />
+    <result column="RECIPIENT_TYPE" property="recipientType" jdbcType="DECIMAL" />
+    <result column="MSG_CONTENT" property="msgContent" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, MSG_TYPE, MSG_MODE, RECIPIENT_TYPE, MSG_CONTENT, STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from MSG_MODEL
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from MSG_MODEL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.message.model.MsgModel" >
+    insert into MSG_MODEL (ID, MSG_TYPE, MSG_MODE, 
+      RECIPIENT_TYPE, MSG_CONTENT, STATE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{msgType,jdbcType=DECIMAL}, #{msgMode,jdbcType=DECIMAL}, 
+      #{recipientType,jdbcType=DECIMAL}, #{msgContent,jdbcType=VARCHAR}, #{state,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.message.model.MsgModel" >
+    insert into MSG_MODEL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="msgType != null" >
+        MSG_TYPE,
+      </if>
+      <if test="msgMode != null" >
+        MSG_MODE,
+      </if>
+      <if test="recipientType != null" >
+        RECIPIENT_TYPE,
+      </if>
+      <if test="msgContent != null" >
+        MSG_CONTENT,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="msgType != null" >
+        #{msgType,jdbcType=DECIMAL},
+      </if>
+      <if test="msgMode != null" >
+        #{msgMode,jdbcType=DECIMAL},
+      </if>
+      <if test="recipientType != null" >
+        #{recipientType,jdbcType=DECIMAL},
+      </if>
+      <if test="msgContent != null" >
+        #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.message.model.MsgModel" >
+    update MSG_MODEL
+    <set >
+      <if test="msgType != null" >
+        MSG_TYPE = #{msgType,jdbcType=DECIMAL},
+      </if>
+      <if test="msgMode != null" >
+        MSG_MODE = #{msgMode,jdbcType=DECIMAL},
+      </if>
+      <if test="recipientType != null" >
+        RECIPIENT_TYPE = #{recipientType,jdbcType=DECIMAL},
+      </if>
+      <if test="msgContent != null" >
+        MSG_CONTENT = #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.message.model.MsgModel" >
+    update MSG_MODEL
+    set MSG_TYPE = #{msgType,jdbcType=DECIMAL},
+      MSG_MODE = #{msgMode,jdbcType=DECIMAL},
+      RECIPIENT_TYPE = #{recipientType,jdbcType=DECIMAL},
+      MSG_CONTENT = #{msgContent,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>
