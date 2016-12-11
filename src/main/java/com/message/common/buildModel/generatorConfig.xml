@@ -5,42 +5,42 @@
 
 <generatorConfiguration>
 	<classPathEntry
-		location="D:\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+		location="D:\repository\com\oracle\ojdbc14\10.2.0.4.0\ojdbc14-10.2.0.4.0.jar" />
 	<context id="mysqlTables" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
-		<plugin type="com.pear.common.buildModel.DefaultPlugin" />
+		<plugin type="com.message.common.buildModel.DefaultPlugin" />
 		<commentGenerator>    
             <property name="suppressDate" value="true"/>    
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->    
             <property name="suppressAllComments" value="true"/>    
         </commentGenerator>
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/pear" userId="root"
-			password="123456">
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl" userId="zxl"
+			password="admin1234">
 		</jdbcConnection>
 
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.pear.model"
-			targetProject="D:\workspace\pear\src\main\java">
+		<javaModelGenerator targetPackage="com.message.model"
+			targetProject="D:\workspace\message\src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.pear.mapping"
-			targetProject="D:\workspace\pear\src\main\java">
+		<sqlMapGenerator targetPackage="com.message.mapping"
+			targetProject="D:\workspace\message\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.pear.dao" targetProject="D:\workspace\pear\src\main\java">
+			targetPackage="com.message.dao" targetProject="D:\workspace\message\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
 		<!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
-		<table tableName="Login" domainObjectName="Login"
+		<table tableName="MSG_MODEL" domainObjectName="MSG_MODEL"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false" />
