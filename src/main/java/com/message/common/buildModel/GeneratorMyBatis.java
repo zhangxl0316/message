@@ -22,7 +22,7 @@ public class GeneratorMyBatis {
 		List<String> warnings=new ArrayList<String>();
 		boolean overwrite=false;
 		String projectBasePath = new File("").getAbsolutePath();
-		File fileConfigFile=new File(projectBasePath+"/src/main/java/com/message/common/buildModel/generatorConfig.xml");
+		File fileConfigFile=new File(projectBasePath+"/src/main/java/com/message/common/buildModel/generatorConfigOffice.xml");
 		ConfigurationParser cp=new ConfigurationParser(warnings);
 		try {
 			Configuration  config=cp.parseConfiguration(fileConfigFile);

@@ -1,17 +1,26 @@
 package com.message.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class MsgModel implements Serializable {
     private Long id;
 
     private Short msgType;
 
-    private Short msgMode;
+    private Long msgCode;
+
+    private String msgName;
+
+    private Short sendMode;
 
     private Short recipientType;
 
     private String msgContent;
+
+    private Date optTime;
+
+    private String optUser;
 
     private Short state;
 
@@ -33,12 +42,28 @@ public class MsgModel implements Serializable {
         this.msgType = msgType;
     }
 
-    public Short getMsgMode() {
-        return msgMode;
+    public Long getMsgCode() {
+        return msgCode;
     }
 
-    public void setMsgMode(Short msgMode) {
-        this.msgMode = msgMode;
+    public void setMsgCode(Long msgCode) {
+        this.msgCode = msgCode;
+    }
+
+    public String getMsgName() {
+        return msgName;
+    }
+
+    public void setMsgName(String msgName) {
+        this.msgName = msgName == null ? null : msgName.trim();
+    }
+
+    public Short getSendMode() {
+        return sendMode;
+    }
+
+    public void setSendMode(Short sendMode) {
+        this.sendMode = sendMode;
     }
 
     public Short getRecipientType() {
@@ -55,6 +80,22 @@ public class MsgModel implements Serializable {
 
     public void setMsgContent(String msgContent) {
         this.msgContent = msgContent == null ? null : msgContent.trim();
+    }
+
+    public Date getOptTime() {
+        return optTime;
+    }
+
+    public void setOptTime(Date optTime) {
+        this.optTime = optTime;
+    }
+
+    public String getOptUser() {
+        return optUser;
+    }
+
+    public void setOptUser(String optUser) {
+        this.optUser = optUser == null ? null : optUser.trim();
     }
 
     public Short getState() {

@@ -4,13 +4,18 @@
   <resultMap id="BaseResultMap" type="com.message.model.MsgModel" >
     <id column="ID" property="id" jdbcType="DECIMAL" />
     <result column="MSG_TYPE" property="msgType" jdbcType="DECIMAL" />
-    <result column="MSG_MODE" property="msgMode" jdbcType="DECIMAL" />
+    <result column="MSG_CODE" property="msgCode" jdbcType="DECIMAL" />
+    <result column="MSG_NAME" property="msgName" jdbcType="VARCHAR" />
+    <result column="SEND_MODE" property="sendMode" jdbcType="DECIMAL" />
     <result column="RECIPIENT_TYPE" property="recipientType" jdbcType="DECIMAL" />
     <result column="MSG_CONTENT" property="msgContent" jdbcType="VARCHAR" />
+    <result column="OPT_TIME" property="optTime" jdbcType="DATE" />
+    <result column="OPT_USER" property="optUser" jdbcType="VARCHAR" />
     <result column="STATE" property="state" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, MSG_TYPE, MSG_MODE, RECIPIENT_TYPE, MSG_CONTENT, STATE
+    ID, MSG_TYPE, MSG_CODE, MSG_NAME, SEND_MODE, RECIPIENT_TYPE, MSG_CONTENT, OPT_TIME, 
+    OPT_USER, STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -23,12 +28,14 @@
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.message.model.MsgModel" >
-    insert into MSG_MODEL (ID, MSG_TYPE, MSG_MODE, 
-      RECIPIENT_TYPE, MSG_CONTENT, STATE
-      )
-    values (#{id,jdbcType=DECIMAL}, #{msgType,jdbcType=DECIMAL}, #{msgMode,jdbcType=DECIMAL}, 
-      #{recipientType,jdbcType=DECIMAL}, #{msgContent,jdbcType=VARCHAR}, #{state,jdbcType=DECIMAL}
-      )
+    insert into MSG_MODEL (ID, MSG_TYPE, MSG_CODE, 
+      MSG_NAME, SEND_MODE, RECIPIENT_TYPE, 
+      MSG_CONTENT, OPT_TIME, OPT_USER, 
+      STATE)
+    values (#{id,jdbcType=DECIMAL}, #{msgType,jdbcType=DECIMAL}, #{msgCode,jdbcType=DECIMAL}, 
+      #{msgName,jdbcType=VARCHAR}, #{sendMode,jdbcType=DECIMAL}, #{recipientType,jdbcType=DECIMAL}, 
+      #{msgContent,jdbcType=VARCHAR}, #{optTime,jdbcType=DATE}, #{optUser,jdbcType=VARCHAR}, 
+      #{state,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.message.model.MsgModel" >
     insert into MSG_MODEL
@@ -39,14 +46,26 @@
       <if test="msgType != null" >
         MSG_TYPE,
       </if>
-      <if test="msgMode != null" >
-        MSG_MODE,
+      <if test="msgCode != null" >
+        MSG_CODE,
+      </if>
+      <if test="msgName != null" >
+        MSG_NAME,
+      </if>
+      <if test="sendMode != null" >
+        SEND_MODE,
       </if>
       <if test="recipientType != null" >
         RECIPIENT_TYPE,
       </if>
       <if test="msgContent != null" >
         MSG_CONTENT,
+      </if>
+      <if test="optTime != null" >
+        OPT_TIME,
+      </if>
+      <if test="optUser != null" >
+        OPT_USER,
       </if>
       <if test="state != null" >
         STATE,
@@ -59,14 +78,26 @@
       <if test="msgType != null" >
         #{msgType,jdbcType=DECIMAL},
       </if>
-      <if test="msgMode != null" >
-        #{msgMode,jdbcType=DECIMAL},
+      <if test="msgCode != null" >
+        #{msgCode,jdbcType=DECIMAL},
+      </if>
+      <if test="msgName != null" >
+        #{msgName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendMode != null" >
+        #{sendMode,jdbcType=DECIMAL},
       </if>
       <if test="recipientType != null" >
         #{recipientType,jdbcType=DECIMAL},
       </if>
       <if test="msgContent != null" >
         #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="optTime != null" >
+        #{optTime,jdbcType=DATE},
+      </if>
+      <if test="optUser != null" >
+        #{optUser,jdbcType=VARCHAR},
       </if>
       <if test="state != null" >
         #{state,jdbcType=DECIMAL},
@@ -79,14 +110,26 @@
       <if test="msgType != null" >
         MSG_TYPE = #{msgType,jdbcType=DECIMAL},
       </if>
-      <if test="msgMode != null" >
-        MSG_MODE = #{msgMode,jdbcType=DECIMAL},
+      <if test="msgCode != null" >
+        MSG_CODE = #{msgCode,jdbcType=DECIMAL},
+      </if>
+      <if test="msgName != null" >
+        MSG_NAME = #{msgName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendMode != null" >
+        SEND_MODE = #{sendMode,jdbcType=DECIMAL},
       </if>
       <if test="recipientType != null" >
         RECIPIENT_TYPE = #{recipientType,jdbcType=DECIMAL},
       </if>
       <if test="msgContent != null" >
         MSG_CONTENT = #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="optTime != null" >
+        OPT_TIME = #{optTime,jdbcType=DATE},
+      </if>
+      <if test="optUser != null" >
+        OPT_USER = #{optUser,jdbcType=VARCHAR},
       </if>
       <if test="state != null" >
         STATE = #{state,jdbcType=DECIMAL},
@@ -97,9 +140,13 @@
   <update id="updateByPrimaryKey" parameterType="com.message.model.MsgModel" >
     update MSG_MODEL
     set MSG_TYPE = #{msgType,jdbcType=DECIMAL},
-      MSG_MODE = #{msgMode,jdbcType=DECIMAL},
+      MSG_CODE = #{msgCode,jdbcType=DECIMAL},
+      MSG_NAME = #{msgName,jdbcType=VARCHAR},
+      SEND_MODE = #{sendMode,jdbcType=DECIMAL},
       RECIPIENT_TYPE = #{recipientType,jdbcType=DECIMAL},
       MSG_CONTENT = #{msgContent,jdbcType=VARCHAR},
+      OPT_TIME = #{optTime,jdbcType=DATE},
+      OPT_USER = #{optUser,jdbcType=VARCHAR},
       STATE = #{state,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}
   </update>

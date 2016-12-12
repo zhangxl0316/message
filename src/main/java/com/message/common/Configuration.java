@@ -8,8 +8,8 @@ package com.message.common;
 public class Configuration {
 	/** total键 存放总记录数，必须的 ,EasyUI根据这个参数，可以计算page和number的值，这个值不是users的长度 */
 	public static final String TOTAL = "total";
-	/** rows键 存放每页记录 list */
-	public static final String DATA = "rows";
+	/** 存放每页记录 list */
+	public static final String DATA = "data";
 	public static final String SUCCESS = "success";
-	public static final String MESSAGE = "message";
+	public static final String MESSAGE = "msg";
 }
