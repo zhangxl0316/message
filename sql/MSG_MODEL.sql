@@ -1,8 +1,8 @@
 drop table MSG_MODEL cascade constraints;
 
-drop sequence SEQ_MSG_CODE;
+drop sequence SEQ_MSG_MODEL;
 
-create sequence SEQ_MSG_CODE
+create sequence SEQ_MSG_MODEL
 start with 1
 increment by 1;
 
@@ -10,7 +10,7 @@ create table MSG_MODEL
 (
    ID                   NUMBER(14)           not null,
    MSG_TYPE             NUMBER(2),
-   MSG_CODE             NUMBER(10),
+   MSG_CODE             VARCHAR2(10)         not null,
    MSG_NAME             VARCHAR2(20),
    SEND_MODE            NUMBER(1),
    RECIPIENT_TYPE       NUMBER(1),

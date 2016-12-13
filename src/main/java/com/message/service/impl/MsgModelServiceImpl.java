@@ -1,9 +1,13 @@
 package com.message.service.impl;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.message.common.EasyPage;
 import com.message.dao.MsgModelMapper;
 import com.message.model.MsgModel;
 import com.message.service.MsgModelService;
@@ -23,5 +27,22 @@ public class MsgModelServiceImpl implements MsgModelService {
 	@Override
 	public MsgModel queryMsgModelById(long id) {
 		return msgModelMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public EasyPage<MsgModel> queryMsgModelPage(Map<String, Object> param, int nowPage, int pageSize) {
+		if(param != null) {
+			if(param.get("msgName") != null) param.put("msgName", "%" + param.get("msgName") + "%");
+			if(param.get("msgContent") != null) param.put("msgContent", "%" + param.get("msgContent") + "%");
+			if(param.get("optUser") != null) param.put("optUser", "%" + param.get("optUser") + "%");
+		}
+		PageHelper.startPage(nowPage, pageSize);
+		return  new EasyPage<MsgModel>(msgModelMapper.selectValidMsgModel());
+	}
+
+	@Override
+	public int addMsgModel(MsgModel msgModel) {
+		// TODO Auto-generated method stub
+		return msgModelMapper.insertSelective(msgModel);
 	}
 }

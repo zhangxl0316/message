@@ -1,5 +1,8 @@
 package com.message.service;
 
+import java.util.Map;
+
+import com.message.common.EasyPage;
 import com.message.model.MsgModel;
 
 /**
@@ -10,5 +13,7 @@ import com.message.model.MsgModel;
  * @version 1.0
  */
 public interface MsgModelService {
+	public int addMsgModel(MsgModel msgModel);
 	public MsgModel queryMsgModelById(long id);
+	public EasyPage<MsgModel> queryMsgModelPage(Map<String, Object> param, int nowPage, int pageSize);
 }

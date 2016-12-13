@@ -8,7 +8,7 @@ public class MsgModel implements Serializable {
 
     private Short msgType;
 
-    private Long msgCode;
+    private String msgCode;
 
     private String msgName;
 
@@ -42,11 +42,11 @@ public class MsgModel implements Serializable {
         this.msgType = msgType;
     }
 
-    public Long getMsgCode() {
+    public String getMsgCode() {
         return msgCode;
     }
 
-    public void setMsgCode(Long msgCode) {
+    public void setMsgCode(String msgCode) {
         this.msgCode = msgCode;
     }
 

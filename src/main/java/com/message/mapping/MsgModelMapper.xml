@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.message.model.MsgModel" >
     <id column="ID" property="id" jdbcType="DECIMAL" />
     <result column="MSG_TYPE" property="msgType" jdbcType="DECIMAL" />
-    <result column="MSG_CODE" property="msgCode" jdbcType="DECIMAL" />
+    <result column="MSG_CODE" property="msgCode" jdbcType="VARCHAR" />
     <result column="MSG_NAME" property="msgName" jdbcType="VARCHAR" />
     <result column="SEND_MODE" property="sendMode" jdbcType="DECIMAL" />
     <result column="RECIPIENT_TYPE" property="recipientType" jdbcType="DECIMAL" />
@@ -27,17 +27,23 @@
     delete from MSG_MODEL
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.message.model.MsgModel" >
+  <insert id="insert" parameterType="com.message.model.MsgModel" useGeneratedKeys="true" keyProperty="id">
+  	<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="id">
+		SELECT SEQ_MSG_MODEL.NEXTVAL FROM DUAL
+	</selectKey>
     insert into MSG_MODEL (ID, MSG_TYPE, MSG_CODE, 
       MSG_NAME, SEND_MODE, RECIPIENT_TYPE, 
       MSG_CONTENT, OPT_TIME, OPT_USER, 
       STATE)
-    values (#{id,jdbcType=DECIMAL}, #{msgType,jdbcType=DECIMAL}, #{msgCode,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=DECIMAL}, #{msgType,jdbcType=DECIMAL}, #{msgCode,jdbcType=VARCHAR}, 
       #{msgName,jdbcType=VARCHAR}, #{sendMode,jdbcType=DECIMAL}, #{recipientType,jdbcType=DECIMAL}, 
       #{msgContent,jdbcType=VARCHAR}, #{optTime,jdbcType=DATE}, #{optUser,jdbcType=VARCHAR}, 
       #{state,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.message.model.MsgModel" >
+  	<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="id">
+		SELECT SEQ_MSG_MODEL.NEXTVAL FROM DUAL
+	</selectKey>
     insert into MSG_MODEL
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -79,7 +85,7 @@
         #{msgType,jdbcType=DECIMAL},
       </if>
       <if test="msgCode != null" >
-        #{msgCode,jdbcType=DECIMAL},
+        #{msgCode,jdbcType=VARCHAR},
       </if>
       <if test="msgName != null" >
         #{msgName,jdbcType=VARCHAR},
@@ -111,7 +117,7 @@
         MSG_TYPE = #{msgType,jdbcType=DECIMAL},
       </if>
       <if test="msgCode != null" >
-        MSG_CODE = #{msgCode,jdbcType=DECIMAL},
+        MSG_CODE = #{msgCode,jdbcType=VARCHAR},
       </if>
       <if test="msgName != null" >
         MSG_NAME = #{msgName,jdbcType=VARCHAR},
@@ -140,7 +146,7 @@
   <update id="updateByPrimaryKey" parameterType="com.message.model.MsgModel" >
     update MSG_MODEL
     set MSG_TYPE = #{msgType,jdbcType=DECIMAL},
-      MSG_CODE = #{msgCode,jdbcType=DECIMAL},
+      MSG_CODE = #{msgCode,jdbcType=VARCHAR},
       MSG_NAME = #{msgName,jdbcType=VARCHAR},
       SEND_MODE = #{sendMode,jdbcType=DECIMAL},
       RECIPIENT_TYPE = #{recipientType,jdbcType=DECIMAL},
@@ -150,4 +156,40 @@
       STATE = #{state,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+  
+  <select id="selectValidMsgModel" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from MSG_MODEL
+    where 1=1
+      <if test="msgType != null" >
+        and MSG_TYPE = #{msgType,jdbcType=DECIMAL}
+      </if>
+      <if test="msgCode != null" >
+        and MSG_CODE = #{msgCode,jdbcType=VARCHAR}
+      </if>
+      <if test="msgName != null" >
+        and MSG_NAME like #{msgName,jdbcType=VARCHAR}
+      </if>
+      <if test="sendMode != null" >
+        and SEND_MODE = #{sendMode,jdbcType=DECIMAL}
+      </if>
+      <if test="recipientType != null" >
+        and RECIPIENT_TYPE = #{recipientType,jdbcType=DECIMAL}
+      </if>
+      <if test="msgContent != null" >
+        and MSG_CONTENT like #{msgContent,jdbcType=VARCHAR}
+      </if>
+      <if test="optUser != null" >
+        and OPT_USER like #{optUser,jdbcType=VARCHAR}
+      </if>
+      <if test="state != null" >
+        and STATE = #{state,jdbcType=DECIMAL}
+      </if>
+      <if test="state == null" >
+        and STATE = 1
+      </if>
+    
+  </select>
+  
 </mapper>

@@ -6,9 +6,8 @@
 			+ path + "/";
 %>
 
-<script type="text/javascript" src="<%=path%>/resources/js/common/jquery-1.12.0.js"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/common/jqueryExtend.js"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/common/common.js"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/common/commonUi.js"></script>
-<%-- <link href="<c:url value='/css/base.css'/>" rel="stylesheet" type="text/css" media="screen" /> --%>
+<script type="text/javascript" src="<%=path%>/resources/js/common/jquery.min.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/common/jquery.easyui.min.js"></script>
+<link href="<%=path%>/resources/css/common/themes/default/easyui.css" rel="stylesheet" type="text/css" media="screen" /> 
+<link href="<%=path%>/resources/css/common/themes/icon.css" rel="stylesheet" type="text/css" media="screen" /> 
 <input id="path" type="hidden" value="<%=path%>">
