@@ -1,5 +1,8 @@
 package com.message.service.impl;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -37,12 +40,44 @@ public class MsgModelServiceImpl implements MsgModelService {
 			if(param.get("optUser") != null) param.put("optUser", "%" + param.get("optUser") + "%");
 		}
 		PageHelper.startPage(nowPage, pageSize);
-		return  new EasyPage<MsgModel>(msgModelMapper.selectValidMsgModel());
+		return  new EasyPage<MsgModel>(msgModelMapper.selectValidMsgModel(param));
 	}
 
 	@Override
 	public int addMsgModel(MsgModel msgModel) {
-		// TODO Auto-generated method stub
+		msgModel.setOptTime(new Date());
+		msgModel.setState((short) 1);
 		return msgModelMapper.insertSelective(msgModel);
+	}
+
+	@Override
+	public int editMsgModel(MsgModel msgModel) {
+		msgModel.setOptTime(new Date());
+		msgModel.setState((short) 1);
+		return msgModelMapper.updateByPrimaryKeySelective(msgModel);
+	}
+
+	@Override
+	public int removeMsgModel(long id, String optUser) {
+		MsgModel msgModel = msgModelMapper.selectByPrimaryKey(id);
+		if (msgModel != null && msgModel.getState() != 0) {
+			msgModel.setOptTime(new Date());
+			msgModel.setOptUser(optUser);
+			msgModel.setState((short) 0);
+			return msgModelMapper.updateByPrimaryKeySelective(msgModel);
+		}
+		
+		return 0;
+	}
+
+	@Override
+	public MsgModel queryMsgModelByMsgCode(String msgCode) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("msgCode", msgCode);
+		List<MsgModel> list = msgModelMapper.selectValidMsgModel(param);
+		if(list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
 	}
 }

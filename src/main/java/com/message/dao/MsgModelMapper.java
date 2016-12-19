@@ -1,6 +1,7 @@
 package com.message.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.message.model.MsgModel;
 
@@ -17,5 +18,5 @@ public interface MsgModelMapper {
 
     int updateByPrimaryKey(MsgModel record);
     
-    List<MsgModel> selectValidMsgModel();
+    List<MsgModel> selectValidMsgModel(Map<String, Object> param);
 }

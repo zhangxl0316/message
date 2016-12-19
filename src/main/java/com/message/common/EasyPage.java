@@ -19,11 +19,9 @@ public class EasyPage<T> implements Serializable {
     //当前页
     private int page;
     //每页的数量
-    private int rows;
+    private List<T> rows;
     //当前页的数量
     private long total;
-    //结果集
-    private List<T> list;
 
     /**
      * 包装Page对象
@@ -35,16 +33,14 @@ public class EasyPage<T> implements Serializable {
         if (list instanceof Page) {
             Page<T> page = (Page<T>) list;
             this.page = page.getPageNum();
-            this.rows = page.getPageSize();
             this.total = page.getTotal();
            
         } else if (list instanceof Collection) {
             this.page = 1;
-            this.rows = list.size();
             this.total = list.size();
         }
         
-        this.list = list;
+        this.rows = list;
     }
 
 	public int getPage() {
@@ -55,14 +51,6 @@ public class EasyPage<T> implements Serializable {
 		this.page = page;
 	}
 
-	public int getRows() {
-		return rows;
-	}
-
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
-
 	public long getTotal() {
 		return total;
 	}
@@ -71,12 +59,12 @@ public class EasyPage<T> implements Serializable {
 		this.total = total;
 	}
 
-	public List<T> getList() {
-		return list;
+	public List<T> getRows() {
+		return rows;
 	}
 
-	public void setList(List<T> list) {
-		this.list = list;
+	public void setRows(List<T> list) {
+		this.rows = list;
 	}
 
 }

@@ -13,7 +13,10 @@ import com.message.model.MsgModel;
  * @version 1.0
  */
 public interface MsgModelService {
+	public int removeMsgModel(long id, String optUser);
 	public int addMsgModel(MsgModel msgModel);
+	public int editMsgModel(MsgModel msgModel);
 	public MsgModel queryMsgModelById(long id);
+	public MsgModel queryMsgModelByMsgCode(String msgCode);
 	public EasyPage<MsgModel> queryMsgModelPage(Map<String, Object> param, int nowPage, int pageSize);
 }

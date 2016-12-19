@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.message.common.EasyPage;
+import com.message.common.MsgTimerTask;
 import com.message.common.ResultMap;
 import com.message.model.MsgModel;
 import com.message.service.MsgModelService;
@@ -34,13 +35,13 @@ public class MsgModelController extends BaseController {
 	
 	@RequestMapping("/queryMsgModelById")
 	@ResponseBody
-	public Map<String, Object> queryMsgModelById(long id) {
+	public Map<String, Object> queryMsgModelById(Long id) {
 		MsgModel msgModel = msgModelService.queryMsgModelById(id);
 		Map<String, Object> resultMap = null;
 		if(msgModel != null) {
 			resultMap = ResultMap.setData(msgModel, "查询成功");
 		} else {
-			resultMap = ResultMap.setData(false, "查询失败");
+			resultMap = ResultMap.setMsg(false, "查询失败");
 		}
 		return resultMap;
 	}
@@ -62,7 +63,7 @@ public class MsgModelController extends BaseController {
 		if(easyPage != null) {
 			resultMap = ResultMap.setData(easyPage, "查询成功");
 		} else {
-			resultMap = ResultMap.setData(false, "查询失败");
+			resultMap = ResultMap.setMsg(false, "查询失败");
 		}
 		return resultMap;
 	}
@@ -75,7 +76,49 @@ public class MsgModelController extends BaseController {
 		if(msgModelService.addMsgModel(msgModel) > 0) {
 			resultMap = ResultMap.setMsg(true, "保存成功!");
 		} else {
-			resultMap = ResultMap.setData(false, "保存失败");
+			resultMap = ResultMap.setMsg(false, "保存失败");
+		}
+		return resultMap;
+	}
+	
+	@RequestMapping("/editMsgModel")
+	@ResponseBody
+	public Map<String, Object> editMsgModel(MsgModel msgModel) {
+		Map<String, Object> resultMap = null;
+		if(msgModelService.editMsgModel(msgModel) > 0) {
+			resultMap = ResultMap.setMsg(true, "修改成功!");
+		} else {
+			resultMap = ResultMap.setMsg(false, "修改失败");
+		}
+		return resultMap;
+	}
+	
+	@RequestMapping("/removeMsgModel")
+	@ResponseBody
+	public Map<String, Object> removeMsgModel(Long id, String optUser) {
+		Map<String, Object> resultMap = null;
+		if(msgModelService.removeMsgModel(id, optUser) > 0) {
+			resultMap = ResultMap.setMsg(true, "删除成功!");
+		} else {
+			resultMap = ResultMap.setMsg(false, "删除失败");
+		}
+		return resultMap;
+	}
+
+	
+	@RequestMapping("/sendMsgModel")
+	@ResponseBody
+	public Map<String, Object> sendMsgModel(String msgCode, Map<String, Object> replaceMap) {
+		Map<String, Object> resultMap = null;
+		MsgModel msgModel = msgModelService.queryMsgModelByMsgCode(msgCode);
+		if(msgModel != null) {
+			if(MsgTimerTask.addTask(msgModel)) {
+				resultMap = ResultMap.setMsg(true, "消息任务添加成功!");
+			} else {
+				resultMap = ResultMap.setMsg(false, "消息任务添加失败!");
+			}
+		} else {
+			resultMap = ResultMap.setMsg(false, "消息编码有误!");
 		}
 		return resultMap;
 	}
