@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.message.common.EasyPage;
+import com.message.common.ResultMap;
 import com.message.dao.MsgModelMapper;
 import com.message.model.MsgModel;
 import com.message.service.MsgModelService;
@@ -44,10 +45,26 @@ public class MsgModelServiceImpl implements MsgModelService {
 	}
 
 	@Override
-	public int addMsgModel(MsgModel msgModel) {
-		msgModel.setOptTime(new Date());
-		msgModel.setState((short) 1);
-		return msgModelMapper.insertSelective(msgModel);
+	public Map<String, Object> addMsgModel(MsgModel msgModel) {
+		Map<String, Object> resultMap = null;
+		if(msgModel != null) {
+			MsgModel msgModelOld = queryMsgModelByMsgCode(msgModel.getMsgCode());
+			if(msgModelOld == null) {
+				msgModel.setOptTime(new Date());
+				msgModel.setState((short) 1);
+				if(msgModelMapper.insertSelective(msgModel) > 0) {
+					resultMap = ResultMap.setMsg(true, "保存成功!");
+				} else {
+					resultMap = ResultMap.setMsg(false, "系统出错,保存失败!");
+				}
+			} else {
+				resultMap = ResultMap.setMsg(false, "消息编号已存在,保存失败!");
+			}
+		} else {
+			resultMap = ResultMap.setMsg(false, "数据为空,保存失败!");
+		}
+		
+		return resultMap;
 	}
 
 	@Override

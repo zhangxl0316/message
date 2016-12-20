@@ -14,7 +14,7 @@ import com.message.model.MsgModel;
  */
 public interface MsgModelService {
 	public int removeMsgModel(long id, String optUser);
-	public int addMsgModel(MsgModel msgModel);
+	public Map<String, Object> addMsgModel(MsgModel msgModel);
 	public int editMsgModel(MsgModel msgModel);
 	public MsgModel queryMsgModelById(long id);
 	public MsgModel queryMsgModelByMsgCode(String msgCode);

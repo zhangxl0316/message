@@ -57,9 +57,10 @@ public class MsgModelController extends BaseController {
 	 */
 	@RequestMapping("/queryMsgModelPage")
 	@ResponseBody
-	public Map<String, Object> queryMsgModelPage(Map<String, Object> param,
+	public Map<String, Object> queryMsgModelPage(String jparam,
 			@RequestParam(required = false, defaultValue = "1") int nowPage,
             @RequestParam(required = false, defaultValue = "10") int pageSize) {
+		Map<String, Object> param = JSON.parseObject(jparam);
 		EasyPage<MsgModel> easyPage = msgModelService.queryMsgModelPage(param, nowPage, pageSize);
 		Map<String, Object> resultMap = null;
 		if(easyPage != null) {
@@ -74,12 +75,7 @@ public class MsgModelController extends BaseController {
 	@RequestMapping("/addMsgModel")
 	@ResponseBody
 	public Map<String, Object> addMsgModel(MsgModel msgModel) {
-		Map<String, Object> resultMap = null;
-		if(msgModelService.addMsgModel(msgModel) > 0) {
-			resultMap = ResultMap.setMsg(true, "保存成功!");
-		} else {
-			resultMap = ResultMap.setMsg(false, "保存失败");
-		}
+		Map<String, Object> resultMap = msgModelService.addMsgModel(msgModel);
 		return resultMap;
 	}
 	
