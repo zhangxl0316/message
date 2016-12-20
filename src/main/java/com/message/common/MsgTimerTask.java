@@ -25,7 +25,7 @@ public class MsgTimerTask extends TimerTask {
 	public void run() {
 		MsgModel msgModel = queue.poll();
 		if(msgModel != null) {
-			System.out.println(msgModel.getMsgContent());
+			System.out.println(msgModel.getMsgContent() + " (待发送消息" + queue.size()  + " 条)");
 		} else {
 			System.out.println("暂时没有消息");
 		}

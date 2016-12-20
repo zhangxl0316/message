@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.message.common.EasyPage;
 import com.message.common.MsgTimerTask;
 import com.message.common.ResultMap;
+import com.message.common.SimpleStringReplaceUtil;
 import com.message.model.MsgModel;
 import com.message.service.MsgModelService;
 
@@ -108,10 +110,23 @@ public class MsgModelController extends BaseController {
 	
 	@RequestMapping("/sendMsgModel")
 	@ResponseBody
-	public Map<String, Object> sendMsgModel(String msgCode, Map<String, Object> replaceMap) {
+	public Map<String, Object> sendMsgModel(String msgCode, String jsonParam) {
 		Map<String, Object> resultMap = null;
+		Map<String, Object> replaceMap = null;
+		if(jsonParam != null && !"".equals(jsonParam)) {
+			try {
+				replaceMap = JSON.parseObject(jsonParam);
+			} catch (Exception e) {
+				resultMap = ResultMap.setMsg(false, "模板变量错误!");
+				return resultMap;
+			}
+		}
+		
 		MsgModel msgModel = msgModelService.queryMsgModelByMsgCode(msgCode);
 		if(msgModel != null) {
+			//消息内容替换
+			msgModel.setMsgContent(SimpleStringReplaceUtil.replaceByMap(msgModel.getMsgContent(), replaceMap));
+			//添加任务
 			if(MsgTimerTask.addTask(msgModel)) {
 				resultMap = ResultMap.setMsg(true, "消息任务添加成功!");
 			} else {
