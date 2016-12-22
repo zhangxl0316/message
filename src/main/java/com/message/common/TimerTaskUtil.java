@@ -15,12 +15,12 @@ public class TimerTaskUtil {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				MsgModel msgModel = new MsgModel();
-				msgModel.setId(1l);
-				MsgTimerTask.addTask(msgModel);
-				msgModel = new MsgModel();
-				msgModel.setId(2l);
-				MsgTimerTask.addTask(msgModel);
+				for(int i=1; i < 9 ; i++) {
+					MsgModel msgModel = new MsgModel();
+					msgModel.setMsgContent("a" + i);
+					MsgTimerTask.addTask(msgModel);
+				}
+				
 			}
 		});
 		
@@ -28,12 +28,11 @@ public class TimerTaskUtil {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				MsgModel msgModel = new MsgModel();
-				msgModel.setId(3l);
-				MsgTimerTask.addTask(msgModel);
-				msgModel = new MsgModel();
-				msgModel.setId(4l);
-				MsgTimerTask.addTask(msgModel);
+				for(int i=1; i < 9 ; i++) {
+					MsgModel msgModel = new MsgModel();
+					msgModel.setMsgContent("b" + i);
+					MsgTimerTask.addTask(msgModel);
+				}
 			}
 		});
 		
@@ -41,12 +40,11 @@ public class TimerTaskUtil {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				MsgModel msgModel = new MsgModel();
-				msgModel.setId(5l);
-				MsgTimerTask.addTask(msgModel);
-				msgModel = new MsgModel();
-				msgModel.setId(6l);
-				MsgTimerTask.addTask(msgModel);
+				for(int i=1; i < 9 ; i++) {
+					MsgModel msgModel = new MsgModel();
+					msgModel.setMsgContent("c" + i);
+					MsgTimerTask.addTask(msgModel);
+				}
 			}
 		});
 		thread1.start();

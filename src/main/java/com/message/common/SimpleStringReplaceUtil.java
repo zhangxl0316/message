@@ -13,10 +13,13 @@ import java.util.Map;
 public class SimpleStringReplaceUtil {
 
 	public static String replaceByMap(String template, Map<String, Object> replaceMap) {
-		for (String s : replaceMap.keySet()) {
-			template = template.replaceAll("\\$\\{".concat(s).concat("\\}"),
-					replaceMap.get(s).toString());
+		if(replaceMap != null) {
+			for (String s : replaceMap.keySet()) {
+				template = template.replaceAll("\\$\\{".concat(s).concat("\\}"),
+						replaceMap.get(s).toString());
+			}
 		}
+		
 		return template;
 	}
 
